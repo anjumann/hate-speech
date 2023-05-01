@@ -1,0 +1,23 @@
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import LinearSVC
+import joblib
+
+# Load data
+data = pd.read_csv('data/hate_speech_data.csv')
+
+# Preprocess data
+# ...
+
+# Extract features
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(data['text'])
+y = data['label']
+
+# Train SVM model
+model = LinearSVC()
+model.fit(X, y)
+
+# Save model and vectorizer
+joblib.dump(model, 'hate_speech_model.joblib')
+joblib.dump(vectorizer, 'vectorizer.joblib')
